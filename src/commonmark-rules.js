@@ -128,6 +128,23 @@ rules.horizontalRule = {
   }
 }
 
+rules.htmlLink = {
+  filter: function(node, options) {
+   return (
+      options.linkStyle === 'html' &&
+      node.nodeName === 'A' &&
+      node.getAttribute('href')
+    )
+  },
+
+  replacement: function(content, node) {
+    var href = node.getAttribute('href');
+    var title = node.title;
+    return '<a href="'+ href +'" title="'+ title +'" rel="nofollow" target="_blank">'+content+'</a>'
+  }
+}
+
+
 rules.inlineLink = {
   filter: function (node, options) {
     return (
