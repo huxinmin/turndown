@@ -268,6 +268,9 @@ rules.table = {
       divider = '|';
     var th = node.getElementsByTagName('th');
     var tr = node.getElementsByTagName('tr'); 
+    if(!th.length){
+      return node.outerHTML
+    }
     for(var i = 0; i< th.length; i++) {
       thead = thead + th[i].innerHTML+'|';
       divider = divider + options.tableAlign + '|';
