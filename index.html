@@ -123,12 +123,12 @@
     font-size: 14px;
   }
 </style>
-<script src="https://unpkg.com/turndown/dist/turndown.js"></script>
+<script src="./dist/turndown.js"></script>
 </head>
 <body>
 <header>
   <h1>turndown</h1>
-  <a style="float: right" href="https://github.com/domchristie/turndown">Source on GitHub</a>
+  <a style="float: right" href="https://github.com/huxinmin/turndown">Github 源码</a>
 </header>
 <div class="row cf">
   <div class="col">
@@ -172,14 +172,15 @@ console.log(
     <div class="form-group">
       <label for="headingStyle">Heading style</label>
       <select name="headingStyle" id="headingStyle">
-        <option value="setext">setext</option>
         <option value="atx">atx</option>
+        <option value="setext">setext</option>
       </select>
     </div>
 
     <div class="form-group">
       <label for="hr">Horizontal rule</label>
       <select name="hr" id="hr">
+        <option value="">无</option>
         <option value="* * *">* * *</option>
         <option value="- - -">- - -</option>
         <option value="_ _ _">_ _ _</option>
@@ -189,8 +190,8 @@ console.log(
     <div class="form-group">
       <label for="bulletListMarker">Bullet</label>
       <select name="bulletListMarker" id="bulletListMarker">
-        <option value="*">*</option>
         <option value="-">-</option>
+        <option value="*">*</option>
         <option value="+">+</option>
       </select>
     </div>
@@ -198,8 +199,8 @@ console.log(
     <div class="form-group">
       <label for="codeBlockStyle">Code block style</label>
       <select name="codeBlockStyle" id="codeBlockStyle">
-        <option value="indented">indented</option>
         <option value="fenced">fenced</option>
+        <option value="indented">indented</option>
       </select>
     </div>
 
@@ -208,6 +209,16 @@ console.log(
       <select name="fence" id="fence">
         <option value="```">```</option>
         <option value="~~~">~~~</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="tableAlign">tableAlign</label>
+      <select name="tableAlign" id="tableAlign">
+        <option value="-">-</option>
+        <option value="-:">-:</option>
+        <option value=":-">:-</option>
+        <option value=":-:">:-:</option>
       </select>
     </div>
 

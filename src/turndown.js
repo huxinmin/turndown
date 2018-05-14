@@ -22,6 +22,7 @@ export default function TurndownService (options) {
     linkStyle: 'inlined',
     linkReferenceStyle: 'full',
     br: '  ',
+    tableAlign:'-',
     blankReplacement: function (content, node) {
       return node.isBlock ? '\n\n' : ''
     },

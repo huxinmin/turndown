@@ -245,4 +245,31 @@ rules.image = {
   }
 }
 
+rules.table = {
+  filter:'table',
+
+  replacement: function(content, node, options) {
+    var table = '',
+      thead = '|',
+      tbody = '', 
+      divider = '|';
+    var th = node.getElementsByTagName('th');
+    var tr = node.getElementsByTagName('tr'); 
+    for(var i = 0; i< th.length; i++) {
+      thead = thead + th[i].innerHTML+'|';
+      divider = divider + options.tableAlign + '|';
+    }
+    for(var j = 1; j< tr.length; j++ ) {
+      var td = tr[j].getElementsByTagName('td');
+      var cur_tr = '|';
+      for(var k = 0; k< td.length; k++){
+        cur_tr = cur_tr + td[k].innerHTML + '|';
+      }
+      tbody = tbody + cur_tr + '\n';
+    }
+    table = '\n'+thead+'\n'+divider+ '\n'+tbody;
+    return table;
+  }
+}
+
 export default rules
