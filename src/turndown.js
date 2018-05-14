@@ -23,6 +23,7 @@ export default function TurndownService (options) {
     linkReferenceStyle: 'full',
     br: '  ',
     tableAlign:'-',
+    stringReplacement:'',
     blankReplacement: function (content, node) {
       return node.isBlock ? '\n\n' : ''
     },
@@ -54,8 +55,8 @@ TurndownService.prototype = {
     }
 
     if (input === '') return ''
-
-    var output = process.call(this, new RootNode(input))
+    var afterStrRep = stringReplacement(input, this.options.stringReplacement);
+    var output = process.call(this, new RootNode(afterStrRep))
     return postProcess.call(this, output)
   },
 
@@ -280,4 +281,22 @@ function canConvert (input) {
       ))
     )
   )
+}
+
+
+/**
+  * stringReplacement replace for waht you need
+  */
+function stringReplacement(html, stringReplacement){
+  var output = html;
+  if(!stringReplacement){
+    return
+  }
+  var strArr = stringReplacement.split('\n');
+  for(var i=0; i<strArr.length; i++){
+    var tmpArr = strArr[i].split("=");
+    var patt=new RegExp(tmpArr[0],'gm');
+    output = output.replace(patt, tmpArr[1]);
+  }
+  return output;
 }

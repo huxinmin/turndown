@@ -255,6 +255,12 @@ console.log(
         <option value="shortcut">shortcut</option>
       </select>
     </div>
+
+    <div class="form-group">
+      <label for="stringReplacement">String replacement(divided by wrap)</label>
+      <textarea style="height: 60px;" cols="10"  rows="3" name="stringReplacement" id="stringReplacement" type="text"/>1=2
+3=4</textarea>
+    </div>
   </form>
 </div>
 
@@ -282,10 +288,12 @@ console.log(
     function options () {
       var opts = {}
       var inputs = optionsForm.getElementsByTagName('select')
+      var stringReplacement = document.getElementById("stringReplacement");
       for (var i = 0; i < inputs.length; i++) {
         var input = inputs[i]
         opts[input.name] = input.value
       }
+      opts[stringReplacement.name] = stringReplacement.value;
       return opts
     }
   })()
