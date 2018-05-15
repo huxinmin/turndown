@@ -977,10 +977,10 @@ function canConvert (input) {
   * stringReplacement replace for waht you need
   */
 function stringReplacement(html, stringReplacement){
-  var output = html;
   if(!stringReplacement){
-    return
+    return html;
   }
+  var output = html;
   var strArr = stringReplacement.split('\n');
   for(var i=0; i<strArr.length; i++){
     var tmpArr = strArr[i].split("=");
@@ -989,6 +989,10 @@ function stringReplacement(html, stringReplacement){
   }
   return output;
 }
+
+/**
+  *&#124;
+  */
 
 return TurndownService;
 
