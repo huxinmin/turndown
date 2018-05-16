@@ -264,6 +264,7 @@ console.log(
 </div>
 
 <footer><p>turndown is copyright © 2017 <a href="http://www.domchristie.co.uk/">Dom Christie</a> and is released under the MIT license</p></footer>
+<script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
 <script>
   ;(function () {
     var input = document.getElementById('input')
@@ -271,32 +272,39 @@ console.log(
     var optionsForm = document.getElementById('options')
     var turndownService = new window.TurndownService(options())
 
-    //我的自定义的规则
-    /**
-     * 将形如<div class="example_code">
-     *<div class="hl-main">...</div>
-     *</div>转换为代码块的markdown语法
-     */
-
-    turndownService.addRule('example_code', {
-      filter: function (node, options) {
-        console.log(node.nodeName)
-        return (
-          options.codeBlockStyle === 'fenced' &&
-          node.className === 'example_code'
-        )
-      },
-      replacement: function (content, node, options) {
-        debugger
-        var className = node.firstChild.className || ''
-        var language = (className.match(/language-(\S+)/) || [null, ''])[1] || "sh"
-        return (
-          '\n\n' + options.fence + language + '\n' +
-          node.textContent +
-          '\n' + options.fence + '\n\n'
-        )
+    /**将<div class="example">
+      *   <h2 class="example"></2>
+      *   <div class="example_code">
+      *     <div class="hl-main">...</div>
+      *   </div>
+      *  </div>
+      *  改成<pre>...</pre>
+      *
+      */
+    /***自定义转换开始*/
+    function transfer(input){
+      var parser = new DOMParser();
+      var doc = parser.parseFromString(input, "text/html")
+      var examples = doc.getElementsByClassName("example");
+      var divExamples = [];
+      for(var i=0; i<examples.length; i++){
+        if(examples[i].nodeName === "DIV"){
+          divExamples.push(examples[i])
+        }
       }
-    });
+      console.log(divExamples);
+      for(var j=0; j<divExamples.length; j++){
+        var pre = doc.createElement("pre");
+        var codeHtml = divExamples[j].getElementsByClassName("hl-main")[0].innerHTML;
+        
+        pre.innerHTML=codeHtml;
+        
+        doc.body.insertBefore(pre,divExamples[j]);
+        divExamples[j].parentNode.removeChild(divExamples[j]); 
+      }
+      return doc
+    }
+    /**自定义转换结束**/
 
     input.addEventListener('input', update)
 
@@ -308,7 +316,7 @@ console.log(
     update()
 
     function update () {
-      output.value = turndownService.turndown(input.value)
+      output.value = turndownService.turndown(transfer(input.value))
     }
 
     function options () {
