@@ -271,6 +271,33 @@ console.log(
     var optionsForm = document.getElementById('options')
     var turndownService = new window.TurndownService(options())
 
+    //我的自定义的规则
+    /**
+     * 将形如<div class="example_code">
+     *<div class="hl-main">...</div>
+     *</div>转换为代码块的markdown语法
+     */
+
+    turndownService.addRule('example_code', {
+      filter: function (node, options) {
+        console.log(node.nodeName)
+        return (
+          options.codeBlockStyle === 'fenced' &&
+          node.className === 'example_code'
+        )
+      },
+      replacement: function (content, node, options) {
+        debugger
+        var className = node.firstChild.className || ''
+        var language = (className.match(/language-(\S+)/) || [null, ''])[1] || "sh"
+        return (
+          '\n\n' + options.fence + language + '\n' +
+          node.textContent +
+          '\n' + options.fence + '\n\n'
+        )
+      }
+    });
+
     input.addEventListener('input', update)
 
     optionsForm.addEventListener('change', function () {
