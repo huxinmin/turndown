@@ -258,7 +258,11 @@ console.log(
 
     <div class="form-group">
       <label for="stringReplacement">String replacement(divided by wrap)</label>
-      <textarea style="height: 60px;" cols="10"  rows="3" name="stringReplacement" id="stringReplacement" type="text"/></textarea>
+      <textarea style="height: 60px;" cols="10"  rows="3" name="stringReplacement" id="stringReplacement" type="text"/>
+菜鸟教程=学海5涯
+runoob=xuehai5ya
+Runoob=Xuehai5ya
+      </textarea>
     </div>
   </form>
 </div>
@@ -302,7 +306,7 @@ console.log(
         divExamples[j].parentNode.insertBefore(pre,divExamples[j]);
         divExamples[j].parentNode.removeChild(divExamples[j]); 
       }
-      return doc
+      return doc.body.innerHTML
     }
     /**自定义转换结束**/
 
