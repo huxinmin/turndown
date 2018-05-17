@@ -299,7 +299,7 @@ console.log(
         
         pre.innerHTML=codeHtml;
         
-        doc.body.insertBefore(pre,divExamples[j]);
+        divExamples[j].parentNode.insertBefore(pre,divExamples[j]);
         divExamples[j].parentNode.removeChild(divExamples[j]); 
       }
       return doc
