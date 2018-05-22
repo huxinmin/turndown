@@ -4,7 +4,6 @@
 
 Convert HTML into Markdown with JavaScript.
 
-### to-markdown has been renamed to Turndown. See the [migration guide](https://github.com/domchristie/to-markdown/wiki/Migrating-from-to-markdown-to-Turndown) for details.
 
 ## Installation
 
