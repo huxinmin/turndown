@@ -298,7 +298,9 @@ Runoob=Xuehai5ya</textarea>
       console.log(divExamples);
       for(var j=0; j<divExamples.length; j++){
         var pre = doc.createElement("pre");
-        var codeHtml = divExamples[j].getElementsByClassName("hl-main")[0].innerHTML;
+        //如果没有<div class="hl-main">...</div>
+        var codeWraper = divExamples[j].getElementsByClassName("hl-main").length?divExamples[j].getElementsByClassName("hl-main")[0]:divExamples[j].getElementsByClassName("example_code")[0]
+        var codeHtml = codeWraper.innerHTML;
         
         pre.innerHTML=codeHtml;
         
